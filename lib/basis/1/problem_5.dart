@@ -1,16 +1,17 @@
 void main() {
   var num = 1;
-  var x = 1;
- while(num>0) {
-    if (num % x == 0) {
-      x++;
-      if(x == 20){
+  var xNum = num;
+  while (num > 0) {
+    if (num % xNum == 0) {
+      xNum = xNum + 1;
+      if (xNum == 20) {
         print(num);
-        break;
+        // break;
+        num = 0;
       }
-    }else{
-      num++;
-      x = 1;
+    } else {
+      num = num + 1;
+      xNum = 1;
     }
   }
 }
