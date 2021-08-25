@@ -1,4 +1,4 @@
-  ///implementation of finding a largest palindrome
+///implementation of finding a largest palindrome
 void main() {
 //   int inputNum = 999;
 //   int countNum = inputNum;
@@ -21,6 +21,7 @@ void main() {
 //             print('$inputNum * $countNum');
 //             print('$result is the largest palindrome');
 //             break;
+//             countNum = 0;
 //           }
 //         }
 //       }
