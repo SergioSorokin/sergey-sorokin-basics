@@ -109,7 +109,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             child: Text(
-              'Узнать факториал',
+              'Узнать факториал числа $number',
               style: const TextStyle(fontSize: 14),
             ),
           ),
