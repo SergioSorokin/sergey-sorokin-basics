@@ -24,9 +24,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String number = '';
+  String inputNumber = '';
   String symbol = '! :';
   String factorial = '';
+  int parseNumber = 1;
+  int countFC = 1;
+  int store = 1;
+  int temp = 0;
   final formKey = GlobalKey<FormState>();
   final TextEditingController numberController = TextEditingController();
 
@@ -45,46 +49,54 @@ class _HomePageState extends State<HomePage> {
               padding: const EdgeInsets.only(top: 50, bottom: 8),
               child: Text('Введите число '),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 192, right: 192),
-              child: TextFormField(
-                textAlign: TextAlign.center,
-                maxLength: 4,
-                onChanged: (value) {
-                  setState(
-                    () {
-                      number = numberController.text;
-                    },
-                  );
-                },
-                controller: numberController,
-                decoration: InputDecoration(
-                  hintText: '',
-                  hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
-                  enabledBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
+            Center(
+              child: Container(
+                width: 80,
+                height: 60,
+                child: TextFormField(
+                  textAlign: TextAlign.center,
+                  maxLength: 3,
+                  onChanged: (value) {
+                    setState(
+                      () {
+                        inputNumber = numberController.text;
+                      },
+                    );
+                  },
+                  controller: numberController,
+                  decoration: InputDecoration(
+                    hintText: '',
+                    hintStyle: TextStyle(color: Colors.grey, fontSize: 16),
+                    enabledBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
+                    focusedBorder: UnderlineInputBorder(
+                      borderSide: BorderSide(color: Colors.grey),
+                    ),
                   ),
-                  focusedBorder: UnderlineInputBorder(
-                    borderSide: BorderSide(color: Colors.grey),
-                  ),
+                  inputFormatters: [
+                    FilteringTextInputFormatter.allow(
+                      RegExp(r'[0-9]'),
+                    )
+                  ],
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      setState(
+                        () {
+                          factorial = 'Глупо проверять пустое поле';
+                        },
+                      );
+                      return '';
+                    }
+                    return null;
+                  },
                 ),
-                inputFormatters: [
-                  FilteringTextInputFormatter.allow(
-                    RegExp(r'[0-9]'),
-                  )
-                ],
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return 'Пожалуйста, введите число!';
-                  }
-                  return null;
-                },
               ),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 50, bottom: 8),
               child: Text(
-                  'Факториал числа $number${number == '' ? number : symbol}'),
+                  'Факториал числа $inputNumber${inputNumber == '' ? inputNumber : symbol}'),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 28, bottom: 8),
@@ -109,7 +121,7 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
             child: Text(
-              'Узнать факториал числа $number',
+              'Узнать факториал числа $inputNumber',
               style: const TextStyle(fontSize: 14),
             ),
           ),
@@ -120,15 +132,18 @@ class _HomePageState extends State<HomePage> {
 
   void validator() {
     if (formKey.currentState!.validate()) {
+      for (var count = inputNumber.length; count > 0; count--) {
+        parseNumber = int.parse(inputNumber);
+      }
       setState(
         () {
           factorial = '';
-          if (number == '0') {
+          if (parseNumber == 0) {
             factorial = '1';
           }
+          factorialCalculation();
         },
       );
-      print(number);
     }
   }
 
@@ -136,5 +151,18 @@ class _HomePageState extends State<HomePage> {
   void dispose() {
     super.dispose();
     numberController.dispose();
+  }
+
+  factorialCalculation() {
+    while (countFC <= parseNumber) {
+      store = (store * countFC);
+      factorial = store.toString();
+      countFC++;
+      print(factorial);
+      print(parseNumber);
+    }
+    // print(factorial);
+    store = 1;
+    countFC = 1;
   }
 }
