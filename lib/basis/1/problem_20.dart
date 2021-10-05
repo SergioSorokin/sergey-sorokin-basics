@@ -16,7 +16,9 @@ void main() {
         resultFactorStr = factorStr + resultFactorStr;
         temp = factor1 % 1000 ~/ 10;
       } else {
-        resultFactorStr = temp.toString() + resultFactorStr;
+        if (temp != 0) {
+          resultFactorStr = temp.toString() + resultFactorStr;
+        }
         temp = 0;
       }
     }
@@ -24,6 +26,7 @@ void main() {
     resultFactorStr = '';
     factor--;
   }
+  print(resultStr);
   for (var count = resultStr.length; count > 0; count--) {
     parse = int.parse(resultStr[count - 1]);
     term = term + parse;
