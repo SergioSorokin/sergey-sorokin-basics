@@ -40,7 +40,7 @@ class _FourDigitPalindromeState extends State<FourDigitPalindrome> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
-        title: Text('Палиндромом?'),
+        title: Text('Палиндром?'),
       ),
       body: Form(
         key: formKey,
@@ -153,10 +153,10 @@ class _FourDigitPalindromeState extends State<FourDigitPalindrome> {
         index++;
         indexRev--;
       } else {
-        message = 'No';
+        message = 'НЕТ';
         break;
       }
-      message = 'Yes';
+      message = 'ДА';
     }
 
     return message;
