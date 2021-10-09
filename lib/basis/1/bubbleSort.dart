@@ -1,0 +1,37 @@
+void bubbleSort(var L) {
+  int n = L.length;
+  for (var i = 0; i < n; i++) {
+    for (var j = 0; j < n - i - 1; j++) {
+      if (L[j] > L[j + 1]) {
+        var temp = L[j];
+        L[j] = L[j + 1];
+        L[j + 1] = temp;
+      }
+    }
+  }
+}
+
+void recursiveBubbleSortDesc(var L, int n) {
+  for (var i = 0; i < n - 1; i++)
+    if (L[i] < L[i + 1]) {
+      var temp = L[i];
+      L[i] = L[i + 1];
+      L[i + 1] = temp;
+    }
+  if (n == 1) return;
+  recursiveBubbleSortDesc(L, n - 1);
+}
+
+void main() {
+  print("==============Ascending order=============");
+  var lst = [8, 1, 77, 12, 67, 5, 19, 4, 7, 10, 100];
+  print("Before sort lst: $lst");
+  bubbleSort(lst);
+  print("After sort lst: $lst");
+
+  print("==============Descending order=========");
+  var n = lst.length;
+  print("Before sort lst: $lst");
+  recursiveBubbleSortDesc(lst, n);
+  print("After sort lst: $lst");
+}
