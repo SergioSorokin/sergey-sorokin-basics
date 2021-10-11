@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-void main() {
-  runApp(App());
-}
-
-class App extends StatefulWidget {
-  App({Key? key}) : super(key: key);
-
-  @override
-  State<App> createState() => _AppState();
-}
-
-class _AppState extends State<App> {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: FourDigitPalindrome(),
-    );
-  }
-}
+// void main() {
+//   runApp(App());
+// }
+//
+// class App extends StatefulWidget {
+//   App({Key? key}) : super(key: key);
+//
+//   @override
+//   State<App> createState() => _AppState();
+// }
+//
+// class _AppState extends State<App> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       home: FourDigitPalindrome(),
+//     );
+//   }
+// }
 
 class FourDigitPalindrome extends StatefulWidget {
+  static const String routName = '/palindrome';
   const FourDigitPalindrome({Key? key}) : super(key: key);
 
   @override
