@@ -11,7 +11,7 @@ class HomePage {
       child: Scaffold(
         appBar: AppBar(
           title: Text(
-            'PDP',
+            'PDP Project',
             style: TextStyle(fontSize: 44),
           ),
         ),

@@ -1,27 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-// void main() {
-//   runApp(App());
-// }
-//
-// class App extends StatefulWidget {
-//   App({Key? key}) : super(key: key);
-//
-//   @override
-//   State<App> createState() => _AppState();
-// }
-//
-// class _AppState extends State<App> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       home: FourDigitPalindrome(),
-//     );
-//   }
-// }
-
 class FourDigitPalindrome extends StatefulWidget {
   static const String routName = '/palindrome';
   const FourDigitPalindrome({Key? key}) : super(key: key);
@@ -41,7 +20,7 @@ class _FourDigitPalindromeState extends State<FourDigitPalindrome> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
-        title: Text('Палиндром?'),
+        title: Text('Palindrome?'),
       ),
       body: Form(
         key: formKey,
@@ -52,7 +31,7 @@ class _FourDigitPalindromeState extends State<FourDigitPalindrome> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 50, bottom: 8),
-                  child: Text('Введите число '),
+                  child: Text('Enter the number'),
                 ),
                 Center(
                   child: Container(
@@ -88,7 +67,7 @@ class _FourDigitPalindromeState extends State<FourDigitPalindrome> {
                         if (value!.isEmpty) {
                           setState(
                             () {
-                              message = 'Глупо проверять пустое поле';
+                              message = 'It is foolish to check an empty field';
                             },
                           );
                           return '';
@@ -122,7 +101,7 @@ class _FourDigitPalindromeState extends State<FourDigitPalindrome> {
                         ),
                       ),
                       child: Text(
-                        'Узнать',
+                        'To know',
                         style: const TextStyle(fontSize: 14),
                       ),
                     ),
@@ -154,10 +133,10 @@ class _FourDigitPalindromeState extends State<FourDigitPalindrome> {
         index++;
         indexRev--;
       } else {
-        message = 'НЕТ';
+        message = 'NO';
         break;
       }
-      message = 'ДА';
+      message = 'YES';
     }
 
     return message;
