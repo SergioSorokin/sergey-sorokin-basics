@@ -1,21 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-// void main() {
-//   runApp(App());
-// }
-//
-// class App extends StatelessWidget {
-//   App({Key? key}) : super(key: key);
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       home: Factorial(),
-//     );
-//   }
-// }
-
 class Factorial extends StatefulWidget {
   static const String routName = '/factorial';
   const Factorial({Key? key}) : super(key: key);
@@ -40,7 +25,7 @@ class _FactorialState extends State<Factorial> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
-        title: Text('Факториал числа'),
+        title: Text('Factorial number'),
       ),
       body: Form(
         key: formKey,
@@ -51,7 +36,7 @@ class _FactorialState extends State<Factorial> {
               children: [
                 Padding(
                   padding: const EdgeInsets.only(top: 50, bottom: 8),
-                  child: Text('Введите число '),
+                  child: Text('Enter the number'),
                 ),
                 Center(
                   child: Container(
@@ -87,7 +72,8 @@ class _FactorialState extends State<Factorial> {
                         if (value!.isEmpty) {
                           setState(
                             () {
-                              factorial = 'Глупо проверять пустое поле';
+                              factorial =
+                                  'It is foolish to check an empty field';
                             },
                           );
                           return '';
@@ -100,7 +86,7 @@ class _FactorialState extends State<Factorial> {
                 Padding(
                   padding: const EdgeInsets.only(top: 50, bottom: 8),
                   child: Text(
-                      'Факториал числа $inputNumber${inputNumber == '' ? inputNumber : symbol}'),
+                      'Factorial number $inputNumber${inputNumber == '' ? inputNumber : symbol}'),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 28, bottom: 8),
@@ -122,7 +108,7 @@ class _FactorialState extends State<Factorial> {
                         ),
                       ),
                       child: Text(
-                        'Узнать факториал числа $inputNumber',
+                        'Find out the factorial of a number $inputNumber',
                         style: const TextStyle(fontSize: 14),
                       ),
                     ),
