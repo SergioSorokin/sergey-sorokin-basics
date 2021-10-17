@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pdp_project/basis/1/18_factorial.dart';
 import 'package:pdp_project/basis/1/324_four_digit_palindrome.dart';
+import 'package:pdp_project/basis/3/number_systems.dart';
 import 'package:pdp_project/home_page.dart';
 
 main() {
@@ -18,7 +19,8 @@ class App extends StatelessWidget {
       routes: {
         HomePage.routName: (context) => HomePage.initRoute(context),
         Factorial.routName: (context) => Factorial(),
-        FourDigitPalindrome.routName: (context) => FourDigitPalindrome()
+        FourDigitPalindrome.routName: (context) => FourDigitPalindrome(),
+        NumberSystems.routName: (context) => NumberSystems(),
       },
       initialRoute: HomePage.routName,
     );

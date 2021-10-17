@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pdp_project/basis/1/18_factorial.dart';
 import 'package:pdp_project/basis/1/324_four_digit_palindrome.dart';
+import 'package:pdp_project/basis/3/number_systems.dart';
 
 class HomePage {
   static const String routName = '/homePage';
@@ -44,6 +45,20 @@ class HomePage {
                     },
                     child: Text(
                       'Palindrome',
+                      style: TextStyle(fontSize: 32),
+                    )),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16),
+                child: TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        NumberSystems.routName,
+                      );
+                    },
+                    child: Text(
+                      'NumConverter',
                       style: TextStyle(fontSize: 32),
                     )),
               ),
