@@ -67,7 +67,7 @@ class _FourDigitPalindromeState extends State<FourDigitPalindrome> {
                         if (value!.isEmpty) {
                           setState(
                             () {
-                              message = 'It is foolish to check an empty field';
+                              message = 'field is empty';
                             },
                           );
                           return '';
@@ -85,7 +85,7 @@ class _FourDigitPalindromeState extends State<FourDigitPalindrome> {
                   padding: const EdgeInsets.only(top: 28, bottom: 8),
                   child: Text(
                     message,
-                    style: TextStyle(color: Colors.pink, fontSize: 18),
+                    style: TextStyle(color: Colors.pink, fontSize: 32),
                   ),
                 ),
                 Padding(
@@ -101,8 +101,8 @@ class _FourDigitPalindromeState extends State<FourDigitPalindrome> {
                         ),
                       ),
                       child: Text(
-                        'To know',
-                        style: const TextStyle(fontSize: 14),
+                        'Find out',
+                        style: const TextStyle(fontSize: 24),
                       ),
                     ),
                   ),
@@ -128,15 +128,19 @@ class _FourDigitPalindromeState extends State<FourDigitPalindrome> {
   String checkPalindrome(String inputNumber) {
     int index = 0;
     int indexRev = inputNumber.length - 1;
-    while (indexRev > index) {
-      if (inputNumber[indexRev] == inputNumber[index]) {
-        index++;
-        indexRev--;
-      } else {
-        message = 'NO';
-        break;
+    if (inputNumber.length > 1) {
+      while (indexRev > index) {
+        if (inputNumber[indexRev] == inputNumber[index]) {
+          index++;
+          indexRev--;
+        } else {
+          message = 'NO';
+          break;
+        }
+        message = 'YES';
       }
-      message = 'YES';
+    } else {
+      message = 'insufficient data';
     }
 
     return message;
