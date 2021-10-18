@@ -67,7 +67,7 @@ class _FourDigitPalindromeState extends State<FourDigitPalindrome> {
                         if (value!.isEmpty) {
                           setState(
                             () {
-                              message = 'It is foolish to check an empty field';
+                              message = 'field is empty';
                             },
                           );
                           return '';
@@ -128,15 +128,19 @@ class _FourDigitPalindromeState extends State<FourDigitPalindrome> {
   String checkPalindrome(String inputNumber) {
     int index = 0;
     int indexRev = inputNumber.length - 1;
-    while (indexRev > index) {
-      if (inputNumber[indexRev] == inputNumber[index]) {
-        index++;
-        indexRev--;
-      } else {
-        message = 'NO';
-        break;
+    if (inputNumber.length > 1) {
+      while (indexRev > index) {
+        if (inputNumber[indexRev] == inputNumber[index]) {
+          index++;
+          indexRev--;
+        } else {
+          message = 'NO';
+          break;
+        }
+        message = 'YES';
       }
-      message = 'YES';
+    } else {
+      message = 'insufficient data';
     }
 
     return message;
