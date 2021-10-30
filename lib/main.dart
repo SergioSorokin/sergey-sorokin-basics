@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:pdp_project/basis/1/18_factorial.dart';
 import 'package:pdp_project/basis/1/324_four_digit_palindrome.dart';
 import 'package:pdp_project/basis/3/number_systems.dart';
+import 'package:pdp_project/basis/3/time_conversion.dart';
 import 'package:pdp_project/home_page.dart';
 
 main() {
@@ -21,6 +22,7 @@ class App extends StatelessWidget {
         Factorial.routName: (context) => Factorial(),
         FourDigitPalindrome.routName: (context) => FourDigitPalindrome(),
         NumberSystems.routName: (context) => NumberSystems(),
+        TimeConversion.routName: (context) => TimeConversion(),
       },
       initialRoute: HomePage.routName,
     );
