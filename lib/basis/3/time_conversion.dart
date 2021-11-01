@@ -30,8 +30,8 @@ class _TimeConversionState extends State<TimeConversion> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             FlutterSwitch(
-              activeText: '24',
-              inactiveText: '12',
+              activeText: '12',
+              inactiveText: '24',
               padding: 4.0,
               width: 60,
               borderRadius: 30.0,
@@ -91,8 +91,8 @@ class _TimeConversionState extends State<TimeConversion> {
           _hour24 = selectedTime.hour.toString();
           _hour12 = selectedTime.hourOfPeriod.toString();
           _minute = selectedTime.minute.toString();
-          _time24 = '$_hour24 : $_minute';
-          _time12 = '$_hour12 : $_minute $am';
+          _time24 = '$_hour24:$_minute';
+          _time12 = '$_hour12:$_minute $am';
         },
       );
   }
