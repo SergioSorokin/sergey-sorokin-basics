@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:pdp_project/basis/2/special_type_money.dart';
 
 class MoneyScreen extends StatefulWidget {
@@ -36,8 +37,6 @@ class _MoneyScreenState extends State<MoneyScreen> {
                 ),
                 Center(
                   child: Container(
-                    // width: 80,
-                    // height: 60,
                     child: TextFormField(
                       textAlign: TextAlign.center,
                       // maxLength: 8,
@@ -46,7 +45,6 @@ class _MoneyScreenState extends State<MoneyScreen> {
                         setState(
                           () {
                             inputString = inputStringController.text;
-                            // int.parse(numberController.text).toString();
                           },
                         );
                       },
@@ -62,7 +60,7 @@ class _MoneyScreenState extends State<MoneyScreen> {
                         ),
                       ),
                       inputFormatters: [
-                        // FilteringTextInputFormatter.digitsOnly,
+                        FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
                       ],
                       validator: (value) {
                         if (value!.isEmpty) {
