@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:pdp_project/basis/2/addition_screen.dart';
 import 'package:pdp_project/basis/2/special_type_money.dart';
 
 class MoneyScreen extends StatefulWidget {
@@ -89,22 +90,32 @@ class _MoneyScreenState extends State<MoneyScreen> {
                 ),
                 Padding(
                   padding: EdgeInsets.all(16),
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(
-                        minWidth: double.maxFinite, minHeight: 48),
-                    child: ElevatedButton(
-                      onPressed: () => validator(inputString),
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: Text(
-                        'To know',
-                        style: const TextStyle(fontSize: 14),
+                  child: ElevatedButton(
+                    onPressed: () => validator(inputString),
+                    style: ElevatedButton.styleFrom(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
                       ),
                     ),
+                    child: Text(
+                      'Show in monetary terms',
+                      style: const TextStyle(fontSize: 14),
+                    ),
                   ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(4),
+                      child: ElevatedButton(
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => AdditionScreen())),
+                          child: Icon(Icons.add_rounded)),
+                    ),
+                  ],
                 ),
               ],
             ),
