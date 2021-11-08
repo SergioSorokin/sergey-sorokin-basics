@@ -66,12 +66,18 @@ class MyMoney {
   @override
   String toString() {
     var centStr;
+    var dollarsStr = dollars.toString();
     if (cents.toString().length < 2) {
       centStr = '0$cents';
     } else {
       centStr = cents == 0 ? '00' : cents.toString();
     }
-    return '$dollars \$  $centStr ¢';
+    if (dollars == 0) {
+      if (_listInputString[0].contains('-')) {
+        dollarsStr = '-' + dollars.toString();
+      }
+    }
+    return '$dollarsStr \$  $centStr ¢';
   }
 
   String additionMoneyObjects(MyMoney myMoney1, MyMoney myMoney2) {
@@ -89,6 +95,36 @@ class MyMoney {
       _listInputString[1] = tempCents.toString();
       _listInputString[0] = (myMoney1.dollars + myMoney2.dollars).toString();
     }
+    String result = '${_listInputString[0]}.${_listInputString[1]}';
+    return result;
+  }
+
+  String subtractionMoneyObjects(MyMoney myMoney1, MyMoney myMoney2) {
+    int tempCents;
+    int tempDollars;
+    tempCents = (myMoney1.cents - myMoney2.cents);
+    tempDollars = (myMoney1.dollars - myMoney2.dollars);
+
+    if (tempCents < 0) {
+      if (tempDollars > 0) {
+        _listInputString[1] = (100 + tempCents).toString();
+        _listInputString[0] = (tempDollars - 1).toString();
+      } else {
+        _listInputString[1] = (-tempCents).toString();
+        if (tempDollars == 0) {
+          _listInputString[0] = '-' + tempDollars.toString();
+        } else {
+          _listInputString[0] = tempDollars.toString();
+        }
+      }
+    } else {
+      _listInputString[1] = tempCents.toString();
+      _listInputString[0] = tempDollars.toString();
+    }
+    if (_listInputString[1].length == 1) {
+      _listInputString[1] = '0' + _listInputString[1];
+    }
+
     String result = '${_listInputString[0]}.${_listInputString[1]}';
     return result;
   }
