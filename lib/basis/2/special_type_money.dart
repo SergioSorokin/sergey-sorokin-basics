@@ -9,38 +9,52 @@ class MyMoney {
   }
 
   void _parseInputString(String inputString) {
-    if (inputString.contains('.')) {
-      _listInputString = inputString.split('.');
-    } else {
+    if (inputString.contains('<') ||
+        inputString.contains('=') ||
+        inputString.contains('>')) {
       _listInputString[0] = inputString;
-      _listInputString[1] = '0';
-    }
-    var hasOverflow = false;
-    if (_listInputString.length > 0 && _listInputString[1].isNotEmpty) {
-      if (_listInputString[1].length == 1) {
-        cents = int.parse(_listInputString[1]) * 10;
-      } else if (_listInputString[1].length > 2) {
-        cents = _overflow(_listInputString);
-        if (cents == 0) {
-          hasOverflow = true;
+      _listInputString[1] = 'isSymbol';
+      dollars = 0;
+      cents = 0;
+    } else {
+      if (inputString.contains('-') && inputString.length < 2 ||
+          inputString.contains('-.') && inputString.length < 3) {
+      } else if (inputString.contains('.')) {
+        _listInputString = inputString.split('.');
+        if (_listInputString[0] == '-') {
+          _listInputString[0] = '-0';
         }
       } else {
-        cents = int.parse(_listInputString[1]);
+        _listInputString[0] = inputString;
+        _listInputString[1] = '0';
       }
-    } else {
-      cents = 0;
-    }
-    if (_listInputString[0].isEmpty) {
-      if (hasOverflow) {
-        _listInputString[0] = '0';
-        dollars = int.parse(_listInputString[0]) + 1;
+      var hasOverflow = false;
+      if (_listInputString.length > 0 && _listInputString[1].isNotEmpty) {
+        if (_listInputString[1].length == 1) {
+          cents = int.parse(_listInputString[1]) * 10;
+        } else if (_listInputString[1].length > 2) {
+          cents = _overflow(_listInputString);
+          if (cents == 0) {
+            hasOverflow = true;
+          }
+        } else {
+          cents = int.parse(_listInputString[1]);
+        }
       } else {
-        dollars = 0;
+        cents = 0;
       }
-    } else {
-      dollars = hasOverflow
-          ? int.parse(_listInputString[0]) + 1
-          : int.parse(_listInputString[0]);
+      if (_listInputString[0].isEmpty) {
+        if (hasOverflow) {
+          _listInputString[0] = '0';
+          dollars = int.parse(_listInputString[0]) + 1;
+        } else {
+          dollars = 0;
+        }
+      } else {
+        dollars = hasOverflow
+            ? int.parse(_listInputString[0]) + 1
+            : int.parse(_listInputString[0]);
+      }
     }
   }
 
@@ -66,18 +80,25 @@ class MyMoney {
   @override
   String toString() {
     var centStr;
-    var dollarsStr = dollars.toString();
-    if (cents.toString().length < 2) {
-      centStr = '0$cents';
+    var dollarsStr;
+    var result;
+    if (_listInputString[1] == 'isSymbol') {
+      result = _listInputString[0];
     } else {
-      centStr = cents == 0 ? '00' : cents.toString();
-    }
-    if (dollars == 0) {
-      if (_listInputString[0].contains('-')) {
-        dollarsStr = '-' + dollars.toString();
+      dollarsStr = dollars.toString();
+      if (cents.toString().length < 2) {
+        centStr = '0$cents';
+      } else {
+        centStr = cents == 0 ? '00' : cents.toString();
       }
+      if (dollars == 0) {
+        if (_listInputString[0].contains('-')) {
+          dollarsStr = '-' + dollars.toString();
+        }
+      }
+      result = '$dollarsStr \$  $centStr ¢';
     }
-    return '$dollarsStr \$  $centStr ¢';
+    return result;
   }
 
   String additionMoneyObjects(MyMoney myMoney1, MyMoney myMoney2) {
@@ -126,6 +147,24 @@ class MyMoney {
     }
 
     String result = '${_listInputString[0]}.${_listInputString[1]}';
+    return result;
+  }
+
+  String comparisonMoneyObjects(MyMoney myMoney1, MyMoney myMoney2) {
+    String result;
+    if (myMoney1.dollars == myMoney2.dollars) {
+      if (myMoney1.cents == myMoney2.cents) {
+        result = '=';
+      } else if (myMoney1.cents > myMoney2.cents) {
+        result = '>';
+      } else {
+        result = '<';
+      }
+    } else if (myMoney1.dollars > myMoney2.dollars) {
+      result = '>';
+    } else {
+      result = '<';
+    }
     return result;
   }
 }

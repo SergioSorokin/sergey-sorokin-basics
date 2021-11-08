@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pdp_project/basis/2/special_type_money.dart';
 
-class AdditionScreen extends StatefulWidget {
-  const AdditionScreen({Key? key}) : super(key: key);
+class ComparisonScreen extends StatefulWidget {
+  const ComparisonScreen({Key? key}) : super(key: key);
 
   @override
-  _AdditionScreenState createState() => _AdditionScreenState();
+  _ComparisonScreenState createState() => _ComparisonScreenState();
 }
 
-class _AdditionScreenState extends State<AdditionScreen> {
+class _ComparisonScreenState extends State<ComparisonScreen> {
   String message = '';
   final formKey = GlobalKey<FormState>();
   late MyMoney myMoney1;
@@ -22,7 +22,12 @@ class _AdditionScreenState extends State<AdditionScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         title: Text(
-            '${myMoney1 = MyMoney(inputString: inputStringController1.text)} + ${myMoney2 = MyMoney(inputString: inputStringController2.text)}'),
+          '${myMoney1 = MyMoney(
+            inputString: inputStringController1.text,
+          )} VS ${myMoney2 = MyMoney(
+            inputString: inputStringController2.text,
+          )}',
+        ),
         centerTitle: true,
       ),
       body: Form(
@@ -58,7 +63,7 @@ class _AdditionScreenState extends State<AdditionScreen> {
                           ),
                         ),
                         inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+                          FilteringTextInputFormatter.allow(RegExp('[0-9.-]')),
                         ],
                         validator: showValidate),
                   ),
@@ -88,7 +93,7 @@ class _AdditionScreenState extends State<AdditionScreen> {
                         ),
                       ),
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+                        FilteringTextInputFormatter.allow(RegExp('[0-9.-]')),
                       ],
                       validator: showValidate,
                     ),
@@ -140,10 +145,11 @@ class _AdditionScreenState extends State<AdditionScreen> {
     if (formKey.currentState!.validate()) {
       setState(
         () {
-          // message = MyMoney(
-          //         inputString: MyMoney(inputString: '')
-          //             .additionMoneyObjects(myMoney1, myMoney2))
-          //     .toString();
+          var tempSymbol = MyMoney(
+                  inputString: MyMoney(inputString: '')
+                      .comparisonMoneyObjects(myMoney1, myMoney2))
+              .toString();
+          message = '$myMoney1 $tempSymbol $myMoney2';
         },
       );
     }
