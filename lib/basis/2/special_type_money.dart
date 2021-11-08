@@ -73,4 +73,23 @@ class MyMoney {
     }
     return '$dollars \$  $centStr ¢';
   }
+
+  String additionMoneyObjects(MyMoney myMoney1, MyMoney myMoney2) {
+    int tempCents;
+    tempCents = (myMoney1.cents + myMoney2.cents);
+    if (tempCents >= 100) {
+      _listInputString[0] =
+          (myMoney1.dollars + myMoney2.dollars + tempCents ~/ 100).toString();
+      if ((tempCents % 100).toString().length == 1) {
+        _listInputString[1] = '0' + (tempCents % 100).toString();
+      } else {
+        _listInputString[1] = (tempCents % 100).toString();
+      }
+    } else {
+      _listInputString[1] = tempCents.toString();
+      _listInputString[0] = (myMoney1.dollars + myMoney2.dollars).toString();
+    }
+    String result = '${_listInputString[0]}.${_listInputString[1]}';
+    return result;
+  }
 }
