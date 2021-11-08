@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pdp_project/basis/2/addition_screen.dart';
 import 'package:pdp_project/basis/2/special_type_money.dart';
+import 'package:pdp_project/basis/2/subtraction_screen.dart';
 
 class MoneyScreen extends StatefulWidget {
   static const String routName = '/moneyScreen';
@@ -114,6 +115,15 @@ class _MoneyScreenState extends State<MoneyScreen> {
                               MaterialPageRoute(
                                   builder: (context) => AdditionScreen())),
                           child: Icon(Icons.add_rounded)),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(4),
+                      child: ElevatedButton(
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SubtractionScreen())),
+                          child: Icon(Icons.remove_rounded)),
                     ),
                   ],
                 ),
