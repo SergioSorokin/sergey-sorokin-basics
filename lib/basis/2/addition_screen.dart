@@ -140,10 +140,10 @@ class _AdditionScreenState extends State<AdditionScreen> {
     if (formKey.currentState!.validate()) {
       setState(
         () {
-          // message = MyMoney(
-          //         inputString: MyMoney(inputString: '')
-          //             .additionMoneyObjects(myMoney1, myMoney2))
-          //     .toString();
+          message = MyMoney(
+                  inputString: MyMoney(inputString: '')
+                      .additionMoneyObjects(myMoney1, myMoney2))
+              .toString();
         },
       );
     }
