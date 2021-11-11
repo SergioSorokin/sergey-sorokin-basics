@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pdp_project/basis/2/addition_screen.dart';
+import 'package:pdp_project/basis/2/comparison_screen.dart';
 import 'package:pdp_project/basis/2/special_type_money.dart';
 import 'package:pdp_project/basis/2/subtraction_screen.dart';
 
@@ -40,6 +41,7 @@ class _MoneyScreenState extends State<MoneyScreen> {
                 Center(
                   child: Container(
                     child: TextFormField(
+                      keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
                       // maxLength: 8,
                       onFieldSubmitted: validator,
@@ -62,7 +64,7 @@ class _MoneyScreenState extends State<MoneyScreen> {
                         ),
                       ),
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+                        FilteringTextInputFormatter.allow(RegExp('[0-9.-]')),
                       ],
                       validator: (value) {
                         if (value!.isEmpty) {
@@ -124,6 +126,15 @@ class _MoneyScreenState extends State<MoneyScreen> {
                               MaterialPageRoute(
                                   builder: (context) => SubtractionScreen())),
                           child: Icon(Icons.remove_rounded)),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(4),
+                      child: ElevatedButton(
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ComparisonScreen())),
+                          child: Text('VS')),
                     ),
                   ],
                 ),

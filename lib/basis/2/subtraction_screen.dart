@@ -35,6 +35,7 @@ class _SubtractionScreenState extends State<SubtractionScreen> {
                 Center(
                   child: Container(
                     child: TextFormField(
+                        keyboardType: TextInputType.number,
                         textAlign: TextAlign.center,
                         onChanged: (value) {
                           setState(
@@ -57,7 +58,7 @@ class _SubtractionScreenState extends State<SubtractionScreen> {
                           ),
                         ),
                         inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+                          FilteringTextInputFormatter.allow(RegExp('[0-9.-]')),
                         ],
                         validator: showValidate),
                   ),
@@ -65,6 +66,7 @@ class _SubtractionScreenState extends State<SubtractionScreen> {
                 Center(
                   child: Container(
                     child: TextFormField(
+                      keyboardType: TextInputType.number,
                       textAlign: TextAlign.center,
                       onChanged: (value) {
                         setState(
@@ -86,7 +88,7 @@ class _SubtractionScreenState extends State<SubtractionScreen> {
                         ),
                       ),
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+                        FilteringTextInputFormatter.allow(RegExp('[0-9.-]')),
                       ],
                       validator: showValidate,
                     ),
