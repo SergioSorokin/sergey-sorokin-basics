@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pdp_project/basis/2/addition_screen.dart';
 import 'package:pdp_project/basis/2/comparison_screen.dart';
+import 'package:pdp_project/basis/2/multiplication_screen.dart';
 import 'package:pdp_project/basis/2/special_type_money.dart';
 import 'package:pdp_project/basis/2/subtraction_screen.dart';
 
@@ -135,6 +136,54 @@ class _MoneyScreenState extends State<MoneyScreen> {
                               MaterialPageRoute(
                                   builder: (context) => ComparisonScreen())),
                           child: Text('VS')),
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.all(4),
+                      child: ElevatedButton(
+                          onPressed: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      MultiplicationScreen())),
+                          child: Text(
+                            'X',
+                            style: TextStyle(fontSize: 18),
+                          )),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(4),
+                      child: ElevatedButton(
+                          onPressed:
+                              () {} /*=> Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => SubtractionScreen()))*/
+                          ,
+                          child: Text(
+                            '/',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          )),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(4),
+                      child: ElevatedButton(
+                          onPressed:
+                              () {} /*=> Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ComparisonScreen()))*/
+                          ,
+                          child: Text(
+                            '...',
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          )),
                     ),
                   ],
                 ),

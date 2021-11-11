@@ -58,7 +58,7 @@ class MyMoney {
     return _result;
   }
 
-  int _overflow(List<String> _inputList) {
+  static int _overflow(List<String> _inputList) {
     var _result;
     var _temp;
     _temp = int.parse(_inputList[1].substring(2, 3));
@@ -70,7 +70,7 @@ class MyMoney {
     return _result;
   }
 
-  List<String> _splittingNumbers(int _tempNumbers) {
+  static List<String> _splittingNumbers(int _tempNumbers) {
     List<String> _result = ['', ''];
     int _localSing;
     _localSing = _tempNumbers.toString().contains('-') ? -1 : 1;
@@ -97,7 +97,7 @@ class MyMoney {
     //return ' $dollars\$ $cents¢';
   }
 
-  String additionMoneyObjects(MyMoney _myMoney1, MyMoney _myMoney2) {
+  static String additionMoneyObjects(MyMoney _myMoney1, MyMoney _myMoney2) {
     var _result = '';
     int _myNewMoney;
     int _myNewMoney1 =
@@ -111,7 +111,7 @@ class MyMoney {
     return _result;
   }
 
-  String subtractionMoneyObjects(MyMoney _myMoney1, MyMoney _myMoney2) {
+  static String subtractionMoneyObjects(MyMoney _myMoney1, MyMoney _myMoney2) {
     var _result = '';
     int _myNewMoney;
     int _myNewMoney1 =
@@ -123,7 +123,6 @@ class MyMoney {
     } else {
       _myNewMoney = _myNewMoney1 - _myNewMoney2;
     }
-
     List<String> newList = _splittingNumbers(_myNewMoney);
     _result = '${newList[0]}.${newList[1]}';
     return _result;
@@ -142,6 +141,19 @@ class MyMoney {
     }
     // print(_myMoney1 + _myMoney2);
     return _result;
+  }
+
+  static MyMoney multiplicationMethod(MyMoney _myMoney, String inputFactor) {
+    double _tempInputFactor = double.parse(inputFactor);
+    int _myNewMoney =
+        _myMoney._concatenationOfNumbers(_myMoney.dollars, _myMoney.cents);
+    List<String> _tempList =
+        ((_myNewMoney * _tempInputFactor) / 100).toString().split('.');
+    int _tempCents = _overflow(_tempList);
+    int _tempResult =
+        ((double.parse('${_tempList[0]}.$_tempCents') * 100)).toInt();
+    List<String> newList = _splittingNumbers(_tempResult);
+    return MyMoney(inputString: '${newList[0]}.${newList[1]}');
   }
 /* //todo: understand this approach
  operator +(MyMoney other) {
