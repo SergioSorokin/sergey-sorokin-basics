@@ -64,7 +64,7 @@ class _MoneyScreenState extends State<MoneyScreen> {
                         ),
                       ),
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp('[0-9.<=>-]')),
+                        FilteringTextInputFormatter.allow(RegExp('[0-9.-]')),
                       ],
                       validator: (value) {
                         if (value!.isEmpty) {

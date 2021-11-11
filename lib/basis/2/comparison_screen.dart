@@ -146,8 +146,8 @@ class _ComparisonScreenState extends State<ComparisonScreen> {
       setState(
         () {
           var tempSymbol = MyMoney(
-                  inputString: MyMoney(inputString: '')
-                      .comparisonMoneyObjects(myMoney1, myMoney2))
+                  inputString:
+                      MyMoney.comparisonMoneyObjects(myMoney1, myMoney2))
               .toString();
           message = '$myMoney1 $tempSymbol $myMoney2';
         },

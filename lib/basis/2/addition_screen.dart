@@ -58,7 +58,7 @@ class _AdditionScreenState extends State<AdditionScreen> {
                           ),
                         ),
                         inputFormatters: [
-                          FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+                          FilteringTextInputFormatter.allow(RegExp('[0-9.-]')),
                         ],
                         validator: showValidate),
                   ),
@@ -88,7 +88,7 @@ class _AdditionScreenState extends State<AdditionScreen> {
                         ),
                       ),
                       inputFormatters: [
-                        FilteringTextInputFormatter.allow(RegExp('[0-9.]')),
+                        FilteringTextInputFormatter.allow(RegExp('[0-9.-]')),
                       ],
                       validator: showValidate,
                     ),
