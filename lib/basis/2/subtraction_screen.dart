@@ -141,8 +141,8 @@ class _SubtractionScreenState extends State<SubtractionScreen> {
       setState(
         () {
           message = MyMoney(
-                  inputString: MyMoney(inputString: '')
-                      .subtractionMoneyObjects(myMoney1, myMoney2))
+                  inputString:
+                      MyMoney.subtractionMoneyObjects(myMoney1, myMoney2))
               .toString();
         },
       );
