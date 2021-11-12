@@ -185,3 +185,139 @@ class MyMoney {
     _sign = myNewMoney >= 0 ? 1 : -1;
   }*/
 }
+
+class MoneyCents {
+  late final int cents;
+  late final int _sign;
+
+  MoneyCents({required String inputString}) {
+    _createMoneyObject(inputString);
+  }
+
+  MoneyCents.fromCents(int cents) {
+    _createMoneyObject(_splitting(cents.toString()));
+  }
+
+  List<String> _listInputString = ['', ''];
+
+  void _createMoneyObject(String inputString) {
+    _sign = inputString.contains('-') ? -1 : 1;
+    _listInputString = _checkingCurrentInput(inputString).split('.');
+    _listInputString = _overflow(_listInputString);
+    cents = _listInputString[0] == '0' && _sign == -1
+        ? int.parse(_concatenationOfValue(
+                _listInputString[0], _listInputString[1])) *
+            _sign
+        : int.parse(
+            _concatenationOfValue(_listInputString[0], _listInputString[1]));
+    print(cents);
+    _listInputString = _splitting(cents.toString()).split('.');
+    print(_listInputString);
+    // _listInputString = _overflow(_listInputString);
+  }
+
+  String _checkingCurrentInput(String _inputString) {
+    String _result;
+    List<String> _tempList = ['', ''];
+    _tempList = _inputString.contains('.')
+        ? _inputString.split('.')
+        : ['$_inputString', '0'];
+    // if (_inputString.contains('.')) {
+    //   _tempList = _inputString.split('.');
+    // } else {
+    //   _tempList = ['$_inputString', '0'];
+    // }
+    _tempList[0] = _tempList[0] == '-' && _tempList[0].length == 1
+        ? '-0'
+        : _tempList[0].isEmpty
+            ? '0'
+            : _tempList[0];
+    _tempList[1] = _tempList[1].isEmpty ? '0' : _tempList[1];
+    _result = '${_tempList[0]}.${_tempList[1]}';
+    return _result;
+  }
+
+//todo: maybe refactor to extension method
+  List<String> _overflow(List<String> _listInputString) {
+    List<String> _result = ['', ''];
+    int _tempDollars = int.parse(_listInputString[0]);
+    if (_listInputString[1] == '0') {
+      _listInputString[1] = '00';
+    } else {
+      int _tempCents = _listInputString[1].length < 2
+          ? int.parse(_listInputString[1]) * 10
+          : int.parse(_listInputString[1].substring(0, 2));
+      var _temp = _listInputString[1].length > 2
+          ? int.parse(_listInputString[1].substring(2, 3))
+          : 0;
+      if (_temp >= 5) {
+        _tempCents = _tempCents + 1;
+        if (_tempCents > 99) {
+          _tempDollars = _listInputString[0].contains('-')
+              ? _tempDollars + 1 * -1
+              : _tempDollars + 1;
+          _tempCents = _tempCents % 100;
+        }
+      }
+      _listInputString[1] = _tempCents.toString();
+    }
+    _listInputString[1] = _listInputString[1].length == 1
+        ? '0' + _listInputString[1]
+        : _listInputString[1];
+    _listInputString[0] = _tempDollars == 0 && _listInputString[0] == '-0'
+        ? _listInputString[0]
+        : _tempDollars.toString();
+    _result = ['${_listInputString[0]}', '${_listInputString[1]}'];
+    return _result;
+  }
+
+  String _concatenationOfValue(String _dollars, String _cents) {
+    String _result;
+    _result = _dollars + _cents;
+    return _result;
+  }
+
+  String _splitting(String _cents) {
+    String _result = '';
+    List<String> _tempList = (int.parse(_cents) * 0.01).toString().split('.');
+
+    _tempList[1] = _tempList[1].length < 2
+        ? _tempList[1] == '0'
+            ? '00'
+            : (int.parse(_tempList[1]) * 10).toString()
+        : _tempList[1];
+    _result = '${_tempList[0]}.${_tempList[1]}';
+    return _result;
+  }
+
+  @override
+  String toString() {
+    var _result;
+    // _result = !_isSymbol
+    //     ? '${_listInputString[0]}\$ ${_listInputString[1]}¢'
+    //     : _listInputString[0];
+    return '${_listInputString[0]}\$ ${_listInputString[1]}¢';
+    //return ' $dollars\$ $cents¢';
+  }
+
+  // @override
+  // String toString() => '$cents';
+
+  operator +(MoneyCents other) => MoneyCents.fromCents(cents + other.cents);
+
+  operator -(MoneyCents other) => MoneyCents.fromCents(cents - other.cents);
+
+  operator *(MoneyCents other) => MoneyCents.fromCents(cents * other.cents);
+
+  operator /(MoneyCents other) => MoneyCents.fromCents(cents ~/ other.cents);
+
+  operator ~/(MoneyCents other) => MoneyCents.fromCents(cents ~/ other.cents);
+}
+
+void test(MoneyCents m1, MoneyCents m2) {
+  print('test:');
+  print(m1 + m2);
+  print(m1 - m2);
+  print(m1 * m2);
+  print(m1 / m2);
+}
