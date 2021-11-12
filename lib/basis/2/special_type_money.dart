@@ -155,6 +155,19 @@ class MyMoney {
     List<String> newList = _splittingNumbers(_tempResult);
     return MyMoney(inputString: '${newList[0]}.${newList[1]}');
   }
+
+  static MyMoney divisionMethod(MyMoney _myMoney, String inputFactor) {
+    double _tempInputFactor = double.parse(inputFactor);
+    int _myNewMoney =
+        _myMoney._concatenationOfNumbers(_myMoney.dollars, _myMoney.cents);
+    List<String> _tempList =
+        ((_myNewMoney / _tempInputFactor) / 100).toString().split('.');
+    int _tempCents = _overflow(_tempList);
+    int _tempResult =
+        ((double.parse('${_tempList[0]}.$_tempCents') * 100)).toInt();
+    List<String> newList = _splittingNumbers(_tempResult);
+    return MyMoney(inputString: '${newList[0]}.${newList[1]}');
+  }
 /* //todo: understand this approach
  operator +(MyMoney other) {
     int _myNewMoney1 = this._concatenationOfNumbers(this.dollars, this.cents);
