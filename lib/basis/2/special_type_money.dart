@@ -168,6 +168,24 @@ class MyMoney {
     List<String> newList = _splittingNumbers(_tempResult);
     return MyMoney(inputString: '${newList[0]}.${newList[1]}');
   }
+
+  static MyMoney roundingMethod(MyMoney _myMoney, int inputFactor) {
+    int _tempResult;
+    int _myNewMoney =
+        _myMoney._concatenationOfNumbers(_myMoney.dollars, _myMoney.cents);
+    var tempTest = _myNewMoney / inputFactor;
+    List<String> _tempList = tempTest.toString().split('.');
+    int tempInt = int.parse(_tempList[1].substring(0, 1));
+    if (tempInt >= 5) {
+      _tempResult = (_myNewMoney - (_myNewMoney % inputFactor)) + inputFactor;
+    } else {
+      _tempResult = _myNewMoney - (_myNewMoney % inputFactor);
+    }
+    List<String> newList = _splittingNumbers(_tempResult);
+
+    return MyMoney(inputString: '${newList[0]}.${newList[1]}');
+  }
+
 /* //todo: understand this approach
  operator +(MyMoney other) {
     int _myNewMoney1 = this._concatenationOfNumbers(this.dollars, this.cents);

@@ -4,6 +4,7 @@ import 'package:pdp_project/basis/2/addition_screen.dart';
 import 'package:pdp_project/basis/2/comparison_screen.dart';
 import 'package:pdp_project/basis/2/diivision_screen.dart';
 import 'package:pdp_project/basis/2/multiplication_screen.dart';
+import 'package:pdp_project/basis/2/rounding_screen.dart';
 import 'package:pdp_project/basis/2/special_type_money.dart';
 import 'package:pdp_project/basis/2/subtraction_screen.dart';
 
@@ -172,12 +173,10 @@ class _MoneyScreenState extends State<MoneyScreen> {
                     Padding(
                       padding: EdgeInsets.all(4),
                       child: ElevatedButton(
-                          onPressed:
-                              () {} /*=> Navigator.push(
+                          onPressed: () => Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => ComparisonScreen()))*/
-                          ,
+                                  builder: (context) => RoundingScreen())),
                           child: Text(
                             '...',
                             style: TextStyle(
