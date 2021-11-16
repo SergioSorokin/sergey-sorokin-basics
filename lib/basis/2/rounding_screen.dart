@@ -12,9 +12,7 @@ class RoundingScreen extends StatefulWidget {
 class _RoundingScreenState extends State<RoundingScreen> {
   String inputString = '';
   bool _isoOverflow = false;
-
   int _rounding = 1;
-
   String message = '';
   var selectValue = 0;
   late MyMoney _myMoney;
@@ -31,7 +29,7 @@ class _RoundingScreenState extends State<RoundingScreen> {
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
-        title: Text('RoundingScreen'),
+        title: Text('Rounding Screen'),
         centerTitle: true,
       ),
       body: Form(
@@ -202,16 +200,9 @@ class _RoundingScreenState extends State<RoundingScreen> {
                                 _rounding = 1;
                               },
                             ),
-                            RichText(
-                              text: TextSpan(
-                                  text: '00.00',
-                                  style: TextStyle(color: Colors.black),
-                                  children: <TextSpan>[
-                                    TextSpan(
-                                      text: '',
-                                      style: TextStyle(color: Colors.red),
-                                    )
-                                  ]),
+                            Text(
+                              '00.00',
+                              style: TextStyle(color: Colors.black),
                             ),
                           ],
                         ),
