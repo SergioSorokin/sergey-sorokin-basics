@@ -143,8 +143,8 @@ class MyMoney {
     return _result;
   }
 
-  static MyMoney multiplicationMethod(MyMoney _myMoney, String inputFactor) {
-    double _tempInputFactor = double.parse(inputFactor);
+  static MyMoney multiplicationMethod(MyMoney _myMoney, String _inputFactor) {
+    double _tempInputFactor = double.parse(_inputFactor);
     int _myNewMoney =
         _myMoney._concatenationOfNumbers(_myMoney.dollars, _myMoney.cents);
     List<String> _tempList =
@@ -156,8 +156,8 @@ class MyMoney {
     return MyMoney(inputString: '${newList[0]}.${newList[1]}');
   }
 
-  static MyMoney divisionMethod(MyMoney _myMoney, String inputFactor) {
-    double _tempInputFactor = double.parse(inputFactor);
+  static MyMoney divisionMethod(MyMoney _myMoney, String _inputFactor) {
+    double _tempInputFactor = double.parse(_inputFactor);
     int _myNewMoney =
         _myMoney._concatenationOfNumbers(_myMoney.dollars, _myMoney.cents);
     List<String> _tempList =
@@ -169,18 +169,18 @@ class MyMoney {
     return MyMoney(inputString: '${newList[0]}.${newList[1]}');
   }
 
-  static MyMoney roundingMethod(MyMoney _myMoney, int inputFactor) {
+  static MyMoney roundingMethod(
+      MyMoney _myMoney, int _rounding, bool _isoOverflow) {
     int _tempResult;
     int _myNewMoney =
         _myMoney._concatenationOfNumbers(_myMoney.dollars, _myMoney.cents);
-    var tempTest = _myNewMoney / inputFactor;
+    var tempTest = _myNewMoney / _rounding;
     List<String> _tempList = tempTest.toString().split('.');
     int tempInt = int.parse(_tempList[1].substring(0, 1));
-    if (tempInt >= 5) {
-      _tempResult = (_myNewMoney - (_myNewMoney % inputFactor)) + inputFactor;
-    } else {
-      _tempResult = _myNewMoney - (_myNewMoney % inputFactor);
-    }
+    _isoOverflow && tempInt >= 5
+        ? _tempResult = _myNewMoney - (_myNewMoney % _rounding) + _rounding
+        : _tempResult = _myNewMoney - (_myNewMoney % _rounding);
+
     List<String> newList = _splittingNumbers(_tempResult);
 
     return MyMoney(inputString: '${newList[0]}.${newList[1]}');

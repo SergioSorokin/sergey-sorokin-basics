@@ -11,7 +11,8 @@ class RoundingScreen extends StatefulWidget {
 
 class _RoundingScreenState extends State<RoundingScreen> {
   String inputString = '';
-  int rounding = 1;
+  bool _isoOverflow = false;
+  int _rounding = 1;
   String message = '';
   var selectValue = 0;
   late MyMoney _myMoney;
@@ -24,10 +25,11 @@ class _RoundingScreenState extends State<RoundingScreen> {
 
   @override
   Widget build(BuildContext context) {
+    String messageOverflow = _isoOverflow.toString();
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
-        title: Text('RoundingScreen'),
+        title: Text('Rounding Screen'),
         centerTitle: true,
       ),
       body: Form(
@@ -38,7 +40,7 @@ class _RoundingScreenState extends State<RoundingScreen> {
             child: Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 50, bottom: 8),
+                  padding: const EdgeInsets.only(top: 32, bottom: 8),
                   child: Text('Enter the value'),
                 ),
                 Center(
@@ -73,41 +75,137 @@ class _RoundingScreenState extends State<RoundingScreen> {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 50, bottom: 8),
+                  padding: const EdgeInsets.only(top: 24),
+                  child: Column(
+                    children: [
+                      Text('OVERFLOW'),
+                      Switch(
+                        value: _isoOverflow,
+                        onChanged: (value) {
+                          this.setState(() => _isoOverflow = value);
+                          messageOverflow = _isoOverflow.toString();
+                        },
+                      ),
+                      Text(
+                        messageOverflow,
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Radio(
-                        value: 3,
-                        groupValue: selectValue,
-                        onChanged: (value) {
-                          onChanged(value);
-                          rounding = 1000;
-                        },
+                      Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 0, horizontal: 10),
+                            child: Radio(
+                              value: 3,
+                              groupValue: selectValue,
+                              onChanged: (value) {
+                                onChanged(value);
+                                _rounding = 1000;
+                              },
+                            ),
+                          ),
+                          RichText(
+                            text: TextSpan(
+                                text: '0',
+                                style: TextStyle(color: Colors.black),
+                                children: <TextSpan>[
+                                  TextSpan(
+                                    text: '0',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                  TextSpan(
+                                    text: '.',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  TextSpan(
+                                    text: '00',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                ]),
+                          ),
+                        ],
                       ),
-                      Radio(
-                        value: 2,
-                        groupValue: selectValue,
-                        onChanged: (value) {
-                          onChanged(value);
-                          rounding = 100;
-                        },
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0, horizontal: 10),
+                        child: Column(
+                          children: [
+                            Radio(
+                              value: 2,
+                              groupValue: selectValue,
+                              onChanged: (value) {
+                                onChanged(value);
+                                _rounding = 100;
+                              },
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                  text: '00.',
+                                  style: TextStyle(color: Colors.black),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: '00',
+                                      style: TextStyle(color: Colors.red),
+                                    )
+                                  ]),
+                            ),
+                          ],
+                        ),
                       ),
-                      Radio(
-                        value: 1,
-                        groupValue: selectValue,
-                        onChanged: (value) {
-                          onChanged(value);
-                          rounding = 10;
-                        },
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0, horizontal: 12),
+                        child: Column(
+                          children: [
+                            Radio(
+                              value: 1,
+                              groupValue: selectValue,
+                              onChanged: (value) {
+                                onChanged(value);
+                                _rounding = 10;
+                              },
+                            ),
+                            RichText(
+                              text: TextSpan(
+                                  text: '00.0',
+                                  style: TextStyle(color: Colors.black),
+                                  children: <TextSpan>[
+                                    TextSpan(
+                                      text: '0',
+                                      style: TextStyle(color: Colors.red),
+                                    )
+                                  ]),
+                            ),
+                          ],
+                        ),
                       ),
-                      Radio(
-                        value: 0,
-                        groupValue: selectValue,
-                        onChanged: (value) {
-                          onChanged(value);
-                          rounding = 1;
-                        },
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 0, horizontal: 10),
+                        child: Column(
+                          children: [
+                            Radio(
+                              value: 0,
+                              groupValue: selectValue,
+                              onChanged: (value) {
+                                onChanged(value);
+                                _rounding = 1;
+                              },
+                            ),
+                            Text(
+                              '00.00',
+                              style: TextStyle(color: Colors.black),
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -116,7 +214,7 @@ class _RoundingScreenState extends State<RoundingScreen> {
                   padding: const EdgeInsets.only(top: 28, bottom: 8),
                   child: Text(
                     message,
-                    style: TextStyle(color: Colors.pink, fontSize: 18),
+                    style: TextStyle(color: Colors.pink, fontSize: 32),
                   ),
                 ),
                 Padding(
@@ -158,7 +256,8 @@ class _RoundingScreenState extends State<RoundingScreen> {
     if (formKey.currentState!.validate()) {
       setState(
         () {
-          message = MyMoney.roundingMethod(_myMoney, rounding).toString();
+          message = MyMoney.roundingMethod(_myMoney, _rounding, _isoOverflow)
+              .toString();
         },
       );
     }

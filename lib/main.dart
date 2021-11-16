@@ -26,7 +26,7 @@ class App extends StatelessWidget {
         TimeConversion.routName: (context) => TimeConversion(),
         MoneyScreen.routName: (context) => MoneyScreen(),
       },
-      initialRoute: MoneyScreen.routName,
+      initialRoute: HomePage.routName,
     );
   }
 }
