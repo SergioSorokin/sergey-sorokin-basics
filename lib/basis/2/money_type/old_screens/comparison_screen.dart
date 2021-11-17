@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pdp_project/basis/2/special_type_money.dart';
+import 'package:pdp_project/basis/2/money_type/special_type_money.dart';
 
-class DivisionScreen extends StatefulWidget {
-  const DivisionScreen({Key? key}) : super(key: key);
+class ComparisonScreen extends StatefulWidget {
+  const ComparisonScreen({Key? key}) : super(key: key);
 
   @override
-  _DivisionScreenState createState() => _DivisionScreenState();
+  _ComparisonScreenState createState() => _ComparisonScreenState();
 }
 
-class _DivisionScreenState extends State<DivisionScreen> {
+class _ComparisonScreenState extends State<ComparisonScreen> {
   String message = '';
   final formKey = GlobalKey<FormState>();
   late MyMoney myMoney1;
-  late String inputFactor;
+  late MyMoney myMoney2;
   final TextEditingController inputStringController1 = TextEditingController();
   final TextEditingController inputStringController2 = TextEditingController();
   @override
@@ -22,7 +22,12 @@ class _DivisionScreenState extends State<DivisionScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         title: Text(
-            '${myMoney1 = MyMoney(inputString: inputStringController1.text)} / ${inputStringController2.text}'),
+          '${myMoney1 = MyMoney(
+            inputString: inputStringController1.text,
+          )} VS ${myMoney2 = MyMoney(
+            inputString: inputStringController2.text,
+          )}',
+        ),
         centerTitle: true,
       ),
       body: Form(
@@ -71,7 +76,8 @@ class _DivisionScreenState extends State<DivisionScreen> {
                       onChanged: (value) {
                         setState(
                           () {
-                            inputFactor = inputStringController2.text;
+                            myMoney2 = MyMoney(
+                                inputString: inputStringController2.text);
                           },
                         );
                       },
@@ -139,7 +145,11 @@ class _DivisionScreenState extends State<DivisionScreen> {
     if (formKey.currentState!.validate()) {
       setState(
         () {
-          message = (MyMoney.divisionMethod(myMoney1, inputFactor)).toString();
+          var tempSymbol = MyMoney(
+                  inputString:
+                      MyMoney.comparisonMoneyObjects(myMoney1, myMoney2))
+              .toString();
+          message = '$myMoney1 $tempSymbol $myMoney2';
         },
       );
     }

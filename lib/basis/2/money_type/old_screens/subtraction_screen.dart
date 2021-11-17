@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pdp_project/basis/2/special_type_money.dart';
+import 'package:pdp_project/basis/2/money_type/special_type_money.dart';
 
-class AdditionScreen extends StatefulWidget {
-  const AdditionScreen({Key? key}) : super(key: key);
+class SubtractionScreen extends StatefulWidget {
+  const SubtractionScreen({Key? key}) : super(key: key);
 
   @override
-  _AdditionScreenState createState() => _AdditionScreenState();
+  _SubtractionScreenState createState() => _SubtractionScreenState();
 }
 
-class _AdditionScreenState extends State<AdditionScreen> {
+class _SubtractionScreenState extends State<SubtractionScreen> {
   String message = '';
   final formKey = GlobalKey<FormState>();
   late MyMoney myMoney1;
@@ -22,7 +22,7 @@ class _AdditionScreenState extends State<AdditionScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         title: Text(
-            '${myMoney1 = MyMoney(inputString: inputStringController1.text)} + ${myMoney2 = MyMoney(inputString: inputStringController2.text)}'),
+            '${myMoney1 = MyMoney(inputString: inputStringController1.text)} - ${myMoney2 = MyMoney(inputString: inputStringController2.text)}'),
         centerTitle: true,
       ),
       body: Form(
@@ -140,9 +140,8 @@ class _AdditionScreenState extends State<AdditionScreen> {
     if (formKey.currentState!.validate()) {
       setState(
         () {
-          message = MyMoney(
-                  inputString: MyMoney.additionMoneyObjects(myMoney1, myMoney2))
-              .toString();
+          message =
+              MyMoney.subtractionMoneyObjects(myMoney1, myMoney2).toString();
         },
       );
     }

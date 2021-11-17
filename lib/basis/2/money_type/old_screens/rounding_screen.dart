@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pdp_project/basis/2/special_type_money.dart';
+import 'package:pdp_project/basis/2/money_type/special_type_money.dart';
 
 class RoundingScreen extends StatefulWidget {
   const RoundingScreen({Key? key}) : super(key: key);

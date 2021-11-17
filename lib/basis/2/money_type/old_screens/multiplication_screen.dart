@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pdp_project/basis/2/special_type_money.dart';
+import 'package:pdp_project/basis/2/money_type/special_type_money.dart';
 
-class SubtractionScreen extends StatefulWidget {
-  const SubtractionScreen({Key? key}) : super(key: key);
+class MultiplicationScreen extends StatefulWidget {
+  const MultiplicationScreen({Key? key}) : super(key: key);
 
   @override
-  _SubtractionScreenState createState() => _SubtractionScreenState();
+  _MultiplicationScreenState createState() => _MultiplicationScreenState();
 }
 
-class _SubtractionScreenState extends State<SubtractionScreen> {
+class _MultiplicationScreenState extends State<MultiplicationScreen> {
   String message = '';
   final formKey = GlobalKey<FormState>();
   late MyMoney myMoney1;
-  late MyMoney myMoney2;
+  late String inputFactor;
   final TextEditingController inputStringController1 = TextEditingController();
   final TextEditingController inputStringController2 = TextEditingController();
   @override
@@ -22,7 +22,7 @@ class _SubtractionScreenState extends State<SubtractionScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         title: Text(
-            '${myMoney1 = MyMoney(inputString: inputStringController1.text)} - ${myMoney2 = MyMoney(inputString: inputStringController2.text)}'),
+            '${myMoney1 = MyMoney(inputString: inputStringController1.text)} x ${inputStringController2.text}'),
         centerTitle: true,
       ),
       body: Form(
@@ -71,8 +71,7 @@ class _SubtractionScreenState extends State<SubtractionScreen> {
                       onChanged: (value) {
                         setState(
                           () {
-                            myMoney2 = MyMoney(
-                                inputString: inputStringController2.text);
+                            inputFactor = inputStringController2.text;
                           },
                         );
                       },
@@ -140,10 +139,8 @@ class _SubtractionScreenState extends State<SubtractionScreen> {
     if (formKey.currentState!.validate()) {
       setState(
         () {
-          message = MyMoney(
-                  inputString:
-                      MyMoney.subtractionMoneyObjects(myMoney1, myMoney2))
-              .toString();
+          message =
+              (MyMoney.multiplicationMethod(myMoney1, inputFactor)).toString();
         },
       );
     }

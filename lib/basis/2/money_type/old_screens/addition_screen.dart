@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pdp_project/basis/2/special_type_money.dart';
+import 'package:pdp_project/basis/2/money_type/special_type_money.dart';
 
-class MultiplicationScreen extends StatefulWidget {
-  const MultiplicationScreen({Key? key}) : super(key: key);
+class AdditionScreen extends StatefulWidget {
+  const AdditionScreen({Key? key}) : super(key: key);
 
   @override
-  _MultiplicationScreenState createState() => _MultiplicationScreenState();
+  _AdditionScreenState createState() => _AdditionScreenState();
 }
 
-class _MultiplicationScreenState extends State<MultiplicationScreen> {
+class _AdditionScreenState extends State<AdditionScreen> {
   String message = '';
   final formKey = GlobalKey<FormState>();
   late MyMoney myMoney1;
-  late String inputFactor;
+  late MyMoney myMoney2;
   final TextEditingController inputStringController1 = TextEditingController();
   final TextEditingController inputStringController2 = TextEditingController();
   @override
@@ -22,7 +22,7 @@ class _MultiplicationScreenState extends State<MultiplicationScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         title: Text(
-            '${myMoney1 = MyMoney(inputString: inputStringController1.text)} x ${inputStringController2.text}'),
+            '${myMoney1 = MyMoney(inputString: inputStringController1.text)} + ${myMoney2 = MyMoney(inputString: inputStringController2.text)}'),
         centerTitle: true,
       ),
       body: Form(
@@ -71,7 +71,8 @@ class _MultiplicationScreenState extends State<MultiplicationScreen> {
                       onChanged: (value) {
                         setState(
                           () {
-                            inputFactor = inputStringController2.text;
+                            myMoney2 = MyMoney(
+                                inputString: inputStringController2.text);
                           },
                         );
                       },
@@ -139,8 +140,7 @@ class _MultiplicationScreenState extends State<MultiplicationScreen> {
     if (formKey.currentState!.validate()) {
       setState(
         () {
-          message =
-              (MyMoney.multiplicationMethod(myMoney1, inputFactor)).toString();
+          message = MyMoney.additionMoneyObjects(myMoney1, myMoney2).toString();
         },
       );
     }

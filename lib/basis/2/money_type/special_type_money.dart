@@ -61,12 +61,17 @@ class MyMoney {
   static int _overflow(List<String> _inputList) {
     var _result;
     var _temp;
-    _temp = int.parse(_inputList[1].substring(2, 3));
-    if (_temp >= 5) {
-      _result = int.parse(_inputList[1].substring(0, 2)) + 1;
+    if (_inputList[1].length > 1) {
+      _temp = int.parse(_inputList[1].substring(2, 3));
+      if (_temp >= 5) {
+        _result = int.parse(_inputList[1].substring(0, 2)) + 1;
+      } else {
+        _result = int.parse(_inputList[1].substring(0, 2));
+      }
     } else {
-      _result = int.parse(_inputList[1].substring(0, 2));
+      _result = int.parse(_inputList[1]);
     }
+
     return _result;
   }
 
@@ -97,8 +102,7 @@ class MyMoney {
     //return ' $dollars\$ $cents¢';
   }
 
-  static String additionMoneyObjects(MyMoney _myMoney1, MyMoney _myMoney2) {
-    var _result = '';
+  static MyMoney additionMoneyObjects(MyMoney _myMoney1, MyMoney _myMoney2) {
     int _myNewMoney;
     int _myNewMoney1 =
         _myMoney1._concatenationOfNumbers(_myMoney1.dollars, _myMoney1.cents);
@@ -106,13 +110,11 @@ class MyMoney {
         _myMoney2._concatenationOfNumbers(_myMoney2.dollars, _myMoney2.cents);
     _myNewMoney = _myNewMoney1 + (_myNewMoney2);
     List<String> newList = _splittingNumbers(_myNewMoney);
-    _result = '${newList[0]}.${newList[1]}';
-    print(newList);
-    return _result;
+
+    return MyMoney(inputString: '${newList[0]}.${newList[1]}');
   }
 
-  static String subtractionMoneyObjects(MyMoney _myMoney1, MyMoney _myMoney2) {
-    var _result = '';
+  static MyMoney subtractionMoneyObjects(MyMoney _myMoney1, MyMoney _myMoney2) {
     int _myNewMoney;
     int _myNewMoney1 =
         _myMoney1._concatenationOfNumbers(_myMoney1.dollars, _myMoney1.cents);
@@ -124,8 +126,7 @@ class MyMoney {
       _myNewMoney = _myNewMoney1 - _myNewMoney2;
     }
     List<String> newList = _splittingNumbers(_myNewMoney);
-    _result = '${newList[0]}.${newList[1]}';
-    return _result;
+    return MyMoney(inputString: '${newList[0]}.${newList[1]}');
   }
 
   static String comparisonMoneyObjects(MyMoney _myMoney1, MyMoney _myMoney2) {
@@ -139,7 +140,6 @@ class MyMoney {
     } else {
       _result = '=';
     }
-    // print(_myMoney1 + _myMoney2);
     return _result;
   }
 
@@ -157,6 +157,7 @@ class MyMoney {
   }
 
   static MyMoney divisionMethod(MyMoney _myMoney, String _inputFactor) {
+    print('divisionMethod(MyMoney $_myMoney, String $_inputFactor)');
     double _tempInputFactor = double.parse(_inputFactor);
     int _myNewMoney =
         _myMoney._concatenationOfNumbers(_myMoney.dollars, _myMoney.cents);
@@ -185,23 +186,6 @@ class MyMoney {
 
     return MyMoney(inputString: '${newList[0]}.${newList[1]}');
   }
-
-/* //todo: understand this approach
- operator +(MyMoney other) {
-    int _myNewMoney1 = this._concatenationOfNumbers(this.dollars, this.cents);
-    int _myNewMoney2 =
-        other._concatenationOfNumbers(other.dollars, other.cents);
-
-    int _myNewMoney = _myNewMoney1 + _myNewMoney2;
-
-    return MyMoney.fromConcatenatedInt(_myNewMoney);
-  }
-
-  MyMoney.fromConcatenatedInt(int myNewMoney) {
-    dollars = myNewMoney ~/ 100;
-    cents = myNewMoney % 100;
-    _sign = myNewMoney >= 0 ? 1 : -1;
-  }*/
 }
 
 class MoneyCents {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pdp_project/basis/1/18_factorial.dart';
 import 'package:pdp_project/basis/1/324_four_digit_palindrome.dart';
-import 'package:pdp_project/basis/2/money_screen.dart';
+import 'package:pdp_project/basis/2/money_type/screens/money_type_screen.dart';
 import 'package:pdp_project/basis/3/number_systems.dart';
 import 'package:pdp_project/basis/3/time_conversion.dart';
 
@@ -84,11 +84,11 @@ class HomePage {
                     onPressed: () {
                       Navigator.pushNamed(
                         context,
-                        MoneyScreen.routName,
+                        MoneyTypeScreen.routName,
                       );
                     },
                     child: Text(
-                      'MoneyScreen',
+                      'MoneyTypeScreen',
                       style: TextStyle(fontSize: 32),
                     )),
               ),

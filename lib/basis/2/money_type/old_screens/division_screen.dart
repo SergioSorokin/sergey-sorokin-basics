@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pdp_project/basis/2/special_type_money.dart';
+import 'package:pdp_project/basis/2/money_type/special_type_money.dart';
 
-class ComparisonScreen extends StatefulWidget {
-  const ComparisonScreen({Key? key}) : super(key: key);
+class DivisionScreen extends StatefulWidget {
+  const DivisionScreen({Key? key}) : super(key: key);
 
   @override
-  _ComparisonScreenState createState() => _ComparisonScreenState();
+  _DivisionScreenState createState() => _DivisionScreenState();
 }
 
-class _ComparisonScreenState extends State<ComparisonScreen> {
+class _DivisionScreenState extends State<DivisionScreen> {
   String message = '';
   final formKey = GlobalKey<FormState>();
   late MyMoney myMoney1;
-  late MyMoney myMoney2;
+  late String inputFactor;
   final TextEditingController inputStringController1 = TextEditingController();
   final TextEditingController inputStringController2 = TextEditingController();
   @override
@@ -22,12 +22,7 @@ class _ComparisonScreenState extends State<ComparisonScreen> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       appBar: AppBar(
         title: Text(
-          '${myMoney1 = MyMoney(
-            inputString: inputStringController1.text,
-          )} VS ${myMoney2 = MyMoney(
-            inputString: inputStringController2.text,
-          )}',
-        ),
+            '${myMoney1 = MyMoney(inputString: inputStringController1.text)} / ${inputStringController2.text}'),
         centerTitle: true,
       ),
       body: Form(
@@ -76,8 +71,7 @@ class _ComparisonScreenState extends State<ComparisonScreen> {
                       onChanged: (value) {
                         setState(
                           () {
-                            myMoney2 = MyMoney(
-                                inputString: inputStringController2.text);
+                            inputFactor = inputStringController2.text;
                           },
                         );
                       },
@@ -145,11 +139,7 @@ class _ComparisonScreenState extends State<ComparisonScreen> {
     if (formKey.currentState!.validate()) {
       setState(
         () {
-          var tempSymbol = MyMoney(
-                  inputString:
-                      MyMoney.comparisonMoneyObjects(myMoney1, myMoney2))
-              .toString();
-          message = '$myMoney1 $tempSymbol $myMoney2';
+          message = (MyMoney.divisionMethod(myMoney1, inputFactor)).toString();
         },
       );
     }
