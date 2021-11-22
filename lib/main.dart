@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:pdp_project/basis/1/18_factorial.dart';
 import 'package:pdp_project/basis/1/324_four_digit_palindrome.dart';
-import 'package:pdp_project/basis/2/money_type/screens/money_type_screen.dart';
+import 'package:pdp_project/basis/2/money_type/screens/tab_bar_screen.dart';
 import 'package:pdp_project/basis/3/number_systems.dart';
 import 'package:pdp_project/basis/3/time_conversion.dart';
 import 'package:pdp_project/home_page.dart';
@@ -24,7 +24,7 @@ class App extends StatelessWidget {
         FourDigitPalindrome.routName: (context) => FourDigitPalindrome(),
         NumberSystems.routName: (context) => NumberSystems(),
         TimeConversion.routName: (context) => TimeConversion(),
-        MoneyTypeScreen.routName: (context) => MoneyTypeScreen(),
+        TabBarScreen.routName: (context) => TabBarScreen(),
       },
       initialRoute: HomePage.routName,
     );

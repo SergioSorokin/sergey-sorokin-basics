@@ -14,8 +14,11 @@ class MoneyScreen extends StatefulWidget {
 class _MoneyScreenState extends State<MoneyScreen> {
   String inputString = '';
   String message = '';
+  int identification = 0;
   final formKey = GlobalKey<FormState>();
   final TextEditingController inputStringController = TextEditingController();
+  final TextEditingController inputStringController1 = TextEditingController();
+  final TextEditingController inputStringController2 = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -110,7 +113,8 @@ class _MoneyScreenState extends State<MoneyScreen> {
                   onPressed: () => Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => CalculationScreen(),
+                      builder: (context) =>
+                          CalculationScreen(inputStringController1),
                     ),
                   ),
                   style: ElevatedButton.styleFrom(
@@ -123,99 +127,6 @@ class _MoneyScreenState extends State<MoneyScreen> {
                     style: const TextStyle(fontSize: 14),
                   ),
                 ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     Padding(
-                //       padding: EdgeInsets.all(4),
-                //       child: ElevatedButton(
-                //         onPressed: () => Navigator.push(
-                //           context,
-                //           MaterialPageRoute(
-                //             builder: (context) => AdditionScreen(),
-                //           ),
-                //         ),
-                //         child: Icon(Icons.add_rounded),
-                //       ),
-                //     ),
-                //     Padding(
-                //       padding: EdgeInsets.all(4),
-                //       child: ElevatedButton(
-                //         onPressed: () => Navigator.push(
-                //           context,
-                //           MaterialPageRoute(
-                //             builder: (context) => SubtractionScreen(),
-                //           ),
-                //         ),
-                //         child: Icon(Icons.remove_rounded),
-                //       ),
-                //     ),
-                //     Padding(
-                //       padding: EdgeInsets.all(4),
-                //       child: ElevatedButton(
-                //         onPressed: () => Navigator.push(
-                //           context,
-                //           MaterialPageRoute(
-                //             builder: (context) => ComparisonScreen(),
-                //           ),
-                //         ),
-                //         child: Text('VS'),
-                //       ),
-                //     ),
-                //   ],
-                // ),
-                // Row(
-                //   mainAxisAlignment: MainAxisAlignment.center,
-                //   children: [
-                //     Padding(
-                //       padding: EdgeInsets.all(4),
-                //       child: ElevatedButton(
-                //         onPressed: () => Navigator.push(
-                //           context,
-                //           MaterialPageRoute(
-                //             builder: (context) => MultiplicationScreen(),
-                //           ),
-                //         ),
-                //         child: Text(
-                //           'X',
-                //           style: TextStyle(fontSize: 18),
-                //         ),
-                //       ),
-                //     ),
-                //     Padding(
-                //       padding: EdgeInsets.all(4),
-                //       child: ElevatedButton(
-                //         onPressed: () => Navigator.push(
-                //           context,
-                //           MaterialPageRoute(
-                //             builder: (context) => DivisionScreen(),
-                //           ),
-                //         ),
-                //         child: Text(
-                //           '/',
-                //           style: TextStyle(
-                //               fontSize: 18, fontWeight: FontWeight.bold),
-                //         ),
-                //       ),
-                //     ),
-                //     Padding(
-                //       padding: EdgeInsets.all(4),
-                //       child: ElevatedButton(
-                //         onPressed: () => Navigator.push(
-                //           context,
-                //           MaterialPageRoute(
-                //             builder: (context) => RoundingScreen(),
-                //           ),
-                //         ),
-                //         child: Text(
-                //           '...',
-                //           style: TextStyle(
-                //               fontSize: 18, fontWeight: FontWeight.bold),
-                //         ),
-                //       ),
-                //     ),
-                //   ],
-                // ),
               ],
             ),
           ),

@@ -3,29 +3,37 @@ import 'package:flutter/services.dart';
 import 'package:pdp_project/basis/2/money_type/special_type_money.dart';
 
 class CalculationScreen extends StatefulWidget {
-  const CalculationScreen({Key? key}) : super(key: key);
+  final TextEditingController inputStringController1;
+  const CalculationScreen(this.inputStringController1, {Key? key})
+      : super(key: key);
 
   @override
   _CalculationScreenState createState() => _CalculationScreenState();
 }
 
 class _CalculationScreenState extends State<CalculationScreen> {
-  String message = '';
+  late String message = '';
   final formKey = GlobalKey<FormState>();
   late MyMoney myMoney1;
   late MyMoney myMoney2;
   late String inputFactor;
   late FocusNode _focusNode = FocusNode();
-  final TextEditingController inputStringController1 = TextEditingController();
+  late final TextEditingController inputStringController1 =
+      widget.inputStringController1;
   final TextEditingController inputStringController2 = TextEditingController();
+
+  void initialState() {
+    inputStringController2.clear();
+    _focusNode.requestFocus();
+    message = '';
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (inputStringController1.text.isEmpty) {
+      initialState();
+    }
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      appBar: AppBar(
-        title: Text('Calculation Screen'),
-        centerTitle: true,
-      ),
       body: Form(
         key: formKey,
         child: SingleChildScrollView(
@@ -153,16 +161,6 @@ class _CalculationScreenState extends State<CalculationScreen> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: EdgeInsets.all(4),
-                      child: ElevatedButton(
-                        onPressed: () => validator(0),
-                        child: Text(
-                          'C',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ],
@@ -188,16 +186,6 @@ class _CalculationScreenState extends State<CalculationScreen> {
   void validator(int _identification) async {
     if (formKey.currentState!.validate()) {
       switch (_identification) {
-        case 0:
-          setState(
-            () {
-              inputStringController1.clear();
-              inputStringController2.clear();
-              _focusNode.requestFocus();
-              message = '';
-            },
-          );
-          break;
         case 1:
           setState(
             () {

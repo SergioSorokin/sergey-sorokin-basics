@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pdp_project/basis/1/18_factorial.dart';
 import 'package:pdp_project/basis/1/324_four_digit_palindrome.dart';
-import 'package:pdp_project/basis/2/money_type/screens/money_type_screen.dart';
+import 'package:pdp_project/basis/2/money_type/screens/tab_bar_screen.dart';
 import 'package:pdp_project/basis/3/number_systems.dart';
 import 'package:pdp_project/basis/3/time_conversion.dart';
 
@@ -13,6 +13,7 @@ class HomePage {
       top: false,
       child: Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           title: Text(
             'PDP Project',
             style: TextStyle(fontSize: 44),
@@ -84,11 +85,11 @@ class HomePage {
                     onPressed: () {
                       Navigator.pushNamed(
                         context,
-                        MoneyTypeScreen.routName,
+                        TabBarScreen.routName,
                       );
                     },
                     child: Text(
-                      'MoneyTypeScreen',
+                      'TabBarScreen',
                       style: TextStyle(fontSize: 32),
                     )),
               ),

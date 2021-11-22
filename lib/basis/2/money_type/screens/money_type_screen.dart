@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:pdp_project/basis/2/money_type/screens/calculation_screen.dart';
 import 'package:pdp_project/basis/2/money_type/special_type_money.dart';
 
 class MoneyTypeScreen extends StatefulWidget {
   static const String routName = '/moneyTypeScreen';
-  const MoneyTypeScreen({Key? key}) : super(key: key);
+  final TextEditingController inputStringController;
+  const MoneyTypeScreen(this.inputStringController, {Key? key})
+      : super(key: key);
 
   @override
   _MoneyTypeScreenState createState() => _MoneyTypeScreenState();
@@ -18,9 +19,10 @@ class _MoneyTypeScreenState extends State<MoneyTypeScreen> {
   String message = '';
   var selectValue = 0;
   late MyMoney _myMoney;
-
   final formKey = GlobalKey<FormState>();
-  final TextEditingController inputStringController = TextEditingController();
+  late final TextEditingController inputStringController =
+      widget.inputStringController;
+
   void initialState() {
     inputString = '';
     _isoOverflow = false;
@@ -36,13 +38,11 @@ class _MoneyTypeScreenState extends State<MoneyTypeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (inputStringController.text.isEmpty) {
+      initialState();
+    }
     String messageOverflow = _isoOverflow.toString();
     return Scaffold(
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      appBar: AppBar(
-        title: Text('Money Type Screen'),
-        centerTitle: true,
-      ),
       body: Form(
         key: formKey,
         child: SingleChildScrollView(
@@ -65,6 +65,7 @@ class _MoneyTypeScreenState extends State<MoneyTypeScreen> {
                           () {
                             _myMoney = MyMoney(
                                 inputString: inputStringController.text);
+                            validator();
                           },
                         );
                       },
@@ -96,6 +97,7 @@ class _MoneyTypeScreenState extends State<MoneyTypeScreen> {
                         onChanged: (value) {
                           this.setState(() => _isoOverflow = value);
                           messageOverflow = _isoOverflow.toString();
+                          validator();
                         },
                       ),
                       Text(
@@ -233,62 +235,6 @@ class _MoneyTypeScreenState extends State<MoneyTypeScreen> {
                     style: TextStyle(color: Colors.pink, fontSize: 23),
                   ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: 16, bottom: 4),
-                  child: ElevatedButton(
-                    onPressed: () => validator(),
-                    style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
-                    child: Text(
-                      'Show in monetary terms',
-                      style: const TextStyle(fontSize: 14),
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () => Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => CalculationScreen(),
-                        ),
-                      ),
-                      style: ElevatedButton.styleFrom(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                        ),
-                      ),
-                      child: Text(
-                        'Calculations',
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(4),
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                        ),
-                        onPressed: () {
-                          setState(() {
-                            initialState();
-                          });
-                        },
-                        child: Text(
-                          'C',
-                          style: TextStyle(fontSize: 18),
-                        ),
-                      ),
-                    ),
-                  ],
-                )
               ],
             ),
           ),

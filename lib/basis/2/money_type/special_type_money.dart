@@ -59,10 +59,12 @@ class MyMoney {
   }
 
   static int _overflow(List<String> _inputList) {
+    print(_inputList);
     var _result;
     var _temp;
-    if (_inputList[1].length > 1) {
+    if (_inputList[1].length > 2) {
       _temp = int.parse(_inputList[1].substring(2, 3));
+      print(_temp);
       if (_temp >= 5) {
         _result = int.parse(_inputList[1].substring(0, 2)) + 1;
       } else {
@@ -157,7 +159,6 @@ class MyMoney {
   }
 
   static MyMoney divisionMethod(MyMoney _myMoney, String _inputFactor) {
-    print('divisionMethod(MyMoney $_myMoney, String $_inputFactor)');
     double _tempInputFactor = double.parse(_inputFactor);
     int _myNewMoney =
         _myMoney._concatenationOfNumbers(_myMoney.dollars, _myMoney.cents);
